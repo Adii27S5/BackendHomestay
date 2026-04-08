@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: backend-homestay-java
+    runtime: java
+    buildCommand: ./mvnw clean install -DskipTests
+    startCommand: java -jar target/backend-0.1.0-SNAPSHOT.jar
+    envVars:
+      - key: MYSQLHOST
+        value: maglev.proxy.rlwy.net
+      - key: MYSQLPORT
+        value: "28569"
+      - key: MYSQLDATABASE
+        value: railway
+      - key: MYSQLUSER
+        value: root
+      - key: MYSQLPASSWORD
+        value: Aditya@2234
+      - key: MAIL_USERNAME
+        value: tournestofc@gmail.com
+      - key: MAIL_PASSWORD
+        value: rogkopleaitjqcgf
+      - key: PORT
+        value: "8082"

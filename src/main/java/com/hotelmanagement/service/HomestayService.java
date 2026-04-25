@@ -73,8 +73,18 @@ public class HomestayService {
     public Homestay createHomestay(@NonNull Homestay homestay) {
         homestay.setApproved(false); // New submissions require approval
         Homestay saved = homestayRepository.save(homestay);
-        userAlertService.createAlert("admin@tournest.com", 
-            "New Property Pending Approval: " + saved.getTitle(), "PENDING");
+        // Notify admin via alert + email
+        userAlertService.createAlert("admin@tournest.com",
+            "New Property Pending Approval: " + saved.getTitle() + " from " + saved.getHost(), "PENDING");
+        emailNotificationService.sendSupportInquiryToAdmin(
+            saved.getHost(), saved.getHost(),
+            "New Property Submission: " + saved.getTitle(),
+            "A new homestay listing '" + saved.getTitle() + "' in " + saved.getLocation() + " is awaiting your approval in the Admin Hub."
+        );
+        // Notify the host they submitted successfully
+        if (saved.getHost() != null && saved.getHost().contains("@")) {
+            userAlertService.createAlert(saved.getHost(), "Property '" + saved.getTitle() + "' submitted for review!", "SUCCESS");
+        }
         return saved;
     }
 

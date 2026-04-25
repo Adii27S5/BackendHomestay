@@ -147,26 +147,26 @@ public class DataSeeder implements CommandLineRunner {
 
     private void seedHomestays() {
         List<Homestay> homestays = new ArrayList<>();
-        homestays.add(createStay("varanasi-ghat-stay.png", "Aroma Riverfront Haven", "Varanasi", 4.8, 3500.0, "Anandji", 4, 2, 2, "Authentic stay by the river.", "Heritage", "Year-round"));
-        homestays.add(createStay("varanasi-riverside.png", "Kashi Temple Heritage Stay", "Varanasi", 4.9, 4200.0, "Shyamji", 2, 1, 1, "Stay close to the holy Kashi Vishwanath temple.", "Spiritual", "Year-round"));
-        homestays.add(createStay("delhi-lodge.png", "Qutub View Homestay", "Delhi", 4.7, 3800.0, "Sanjay", 3, 1, 1, "Modern terrace view of the historic minaret.", "Heritage", "Year-round"));
-        homestays.add(createStay("munnar-mist.png", "Tea Mist Cottage", "Munnar", 4.9, 5500.0, "Mariamma", 6, 3, 3, "Wake up to misty tea valley views.", "Nature", "Sept - March"));
-        homestays.add(createStay("munnar-valley.png", "Munnar Valley Homestay", "Munnar", 4.7, 4800.0, "Joseph", 4, 2, 2, "Secluded villa amidst cardamom hills.", "Nature", "Year-round"));
-        homestays.add(createStay("shimla-snow.png", "Snow Peaks Manor", "Manali", 4.8, 6500.0, "Meena", 5, 2, 2, "Panoramic views of Himalayan peaks.", "Mountain", "Dec - Feb"));
-        homestays.add(createStay("udaipur-lake.png", "Lakefront Palace Stay", "Udaipur", 4.9, 9500.0, "Karan Singh", 4, 2, 2, "Royal experience overlooking Lake Pichola.", "Heritage", "Sept - March"));
-        homestays.add(createStay("amritsar-stay.png", "Golden Temple Heritage Villa", "Amritsar", 5.0, 4200.0, "Sodhi Ji", 4, 2, 2, "Steps away from the holy shrine.", "Heritage", "Sept - March"));
-        homestays.add(createStay("dal-lake.png", "Srinagar Royal Houseboat", "Srinagar", 4.9, 8500.0, "Bhat", 6, 3, 2, "Luxury carved wood stay on the water.", "Nature", "April - Oct"));
+        homestays.add(createStay("varanasi-ghat-stay.png", "Aroma Riverfront Haven", "Varanasi", 4.8, 3500.0, "Anandji", 4, 2, 2, "Authentic stay by the river.", "Heritage", "Year-round", Arrays.asList("WiFi", "River View", "Ghat Access")));
+        homestays.add(createStay("varanasi-riverside.png", "Kashi Temple Heritage Stay", "Varanasi", 4.9, 4200.0, "Shyamji", 2, 1, 1, "Stay close to the holy Kashi Vishwanath temple.", "Spiritual", "Year-round", Arrays.asList("WiFi", "Spiritual Guide", "Temple View")));
+        homestays.add(createStay("delhi-lodge.png", "Qutub View Homestay", "Delhi", 4.7, 3800.0, "Sanjay", 3, 1, 1, "Modern terrace view of the historic minaret.", "Heritage", "Year-round", Arrays.asList("WiFi", "City View", "Metro Access")));
+        homestays.add(createStay("munnar-mist.png", "Tea Mist Cottage", "Munnar", 4.9, 5500.0, "Mariamma", 6, 3, 3, "Wake up to misty tea valley views.", "Nature", "Sept - March", Arrays.asList("WiFi", "Tea Estate Tour", "Valley View")));
+        homestays.add(createStay("munnar-valley.png", "Munnar Valley Homestay", "Munnar", 4.7, 4800.0, "Joseph", 4, 2, 2, "Secluded villa amidst cardamom hills.", "Nature", "Year-round", Arrays.asList("WiFi", "Garden View", "Campfire")));
+        homestays.add(createStay("shimla-snow.png", "Snow Peaks Manor", "Manali", 4.8, 6500.0, "Meena", 5, 2, 2, "Panoramic views of Himalayan peaks.", "Mountain", "Dec - Feb", Arrays.asList("Heating", "Mountain View", "Local Cuisine")));
+        homestays.add(createStay("udaipur-lake.png", "Lakefront Palace Stay", "Udaipur", 4.9, 9500.0, "Karan Singh", 4, 2, 2, "Royal experience overlooking Lake Pichola.", "Heritage", "Sept - March", Arrays.asList("WiFi", "Lake View", "Royal Dining")));
+        homestays.add(createStay("amritsar-stay.png", "Golden Temple Heritage Villa", "Amritsar", 5.0, 4200.0, "Sodhi Ji", 4, 2, 2, "Steps away from the holy shrine.", "Heritage", "Sept - March", Arrays.asList("WiFi", "Local Meals", "Spiritual Tour")));
+        homestays.add(createStay("dal-lake.png", "Srinagar Royal Houseboat", "Srinagar", 4.9, 8500.0, "Bhat", 6, 3, 2, "Luxury carved wood stay on the water.", "Nature", "April - Oct", Arrays.asList("Heating", "Shikara Ride", "Authentic Wazwan")));
         
         // Missing Destinations added
-        homestays.add(createStay("goa-beach.jpg", "Arambol Beach Villa", "Goa", 4.8, 6500.0, "Fernandes", 8, 4, 3, "Private villa steps from the sand.", "Beach", "Oct - May"));
-        homestays.add(createStay("kerala-houseboat.jpg", "Alleppey Eco Houseboat", "Kerala", 4.9, 8500.0, "Nair", 4, 2, 2, "Authentic traditional floating stay.", "Nature", "Sept - March"));
-        homestays.add(createStay("delhi-lodge.png", "Ballygunge Heritage Stay", "Kolkata", 4.7, 4500.0, "Banerjee", 4, 2, 2, "Vintage Bengali architecture and hospitality.", "Heritage", "Oct - March"));
-        homestays.add(createStay("munnar-mist.png", "Havelock Island Eco Lodge", "Andaman", 4.9, 5800.0, "Singh", 2, 1, 1, "Sustainable lodge in the tropical forest.", "Nature", "Nov - May"));
+        homestays.add(createStay("goa-beach.jpg", "Arambol Beach Villa", "Goa", 4.8, 6500.0, "Fernandes", 8, 4, 3, "Private villa steps from the sand.", "Beach", "Oct - May", Arrays.asList("WiFi", "Private Pool", "Beach Access")));
+        homestays.add(createStay("kerala-houseboat.jpg", "Alleppey Eco Houseboat", "Kerala", 4.9, 8500.0, "Nair", 4, 2, 2, "Authentic traditional floating stay.", "Nature", "Sept - March", Arrays.asList("All Meals", "Sunset Deck", "Backwater Tour")));
+        homestays.add(createStay("delhi-lodge.png", "Ballygunge Heritage Stay", "Kolkata", 4.7, 4500.0, "Banerjee", 4, 2, 2, "Vintage Bengali architecture and hospitality.", "Heritage", "Oct - March", Arrays.asList("Authentic Food", "Library", "Heritage Walk")));
+        homestays.add(createStay("havelock-eco.png", "Havelock Island Eco Lodge", "Andaman", 4.9, 5800.0, "Singh", 2, 1, 1, "Sustainable beachside lodge with direct access to white sands.", "Beach", "Nov - May", Arrays.asList("WiFi", "Snorkeling Gear", "Ocean View")));
         
         homestayRepository.saveAll(homestays);
     }
 
-    private Homestay createStay(String img, String title, String loc, double rat, double price, String host, int guests, int beds, int baths, String desc, String category, String season) {
+    private Homestay createStay(String img, String title, String loc, double rat, double price, String host, int guests, int beds, int baths, String desc, String category, String season, List<String> amenities) {
         Homestay s = new Homestay();
         s.setImage(img);
         s.setTitle(title);
@@ -177,7 +177,7 @@ public class DataSeeder implements CommandLineRunner {
         s.setGuests(guests);
         s.setBedrooms(beds);
         s.setBathrooms(baths);
-        s.setAmenities(Arrays.asList("WiFi", "Local Meals", "Mountain View"));
+        s.setAmenities(amenities);
         s.setCategory(category);
         s.setMaxCapacity(guests + 2);
         s.setDescription(desc);

@@ -41,6 +41,21 @@ public class FoodService {
         return foodRepository.save(food);
     }
 
+    public Food modifyFoodDetails(@NonNull Long id, @NonNull Food details) {
+        Food food = foodRepository.findById(id).orElseThrow(() -> new RuntimeException("Food not found with id: " + id));
+        
+        if (details.getTitle() != null) food.setTitle(details.getTitle());
+        if (details.getLocation() != null) food.setLocation(details.getLocation());
+        if (details.getDescription() != null) food.setDescription(details.getDescription());
+        if (details.getPrice() != null) food.setPrice(details.getPrice());
+        if (details.getImage() != null) food.setImage(details.getImage());
+        if (details.getRating() != null) food.setRating(details.getRating());
+        if (details.getCategory() != null) food.setCategory(details.getCategory());
+        if (details.getRegion() != null) food.setRegion(details.getRegion());
+        
+        return foodRepository.save(food);
+    }
+
     public void deleteFood(@NonNull Long id) {
         foodRepository.deleteById(id);
     }

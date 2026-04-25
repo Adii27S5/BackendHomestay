@@ -9,7 +9,7 @@ public class AppUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String name;
 
     @Column(name = "full_name")
@@ -18,7 +18,7 @@ public class AppUser {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column
+    @Column(nullable = true)
     private String password;
 
     @Column
@@ -75,7 +75,9 @@ public class AppUser {
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
-    public String getName() { return name; }
+    public String getName() { 
+        return name != null ? name : fullName; 
+    }
     public void setName(String name) { this.name = name; }
 
     public String getFullName() { return fullName; }

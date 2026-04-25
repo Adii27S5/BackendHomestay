@@ -38,19 +38,32 @@ public class AppUserService {
     }
 
     public AppUser saveUser(@NonNull AppUser user) {
-        // Prevent duplicate emails during signup
-        if (user.getId() == null) {
-            Optional<AppUser> existing = appUserRepository.findByEmail(user.getEmail());
-            if (existing.isPresent()) {
-                throw new RuntimeException("User with this email already exists!");
-            }
+        // Idempotent Sync: If user exists by email, update them instead of throwing error
+        Optional<AppUser> existing = appUserRepository.findByEmail(user.getEmail());
+        if (existing.isPresent()) {
+            AppUser existingUser = existing.get();
+            existingUser.setFullName(user.getFullName());
+            existingUser.setName(user.getName());
+            existingUser.setRole(user.getRole());
+            existingUser.setJoined(user.getJoined());
+            existingUser.setStatus(user.getStatus());
+            return appUserRepository.save(existingUser);
         }
         
+        if (user.getPassword() == null) user.setPassword("OAUTH_NO_PASSWORD");
+        if (user.getName() == null) user.setName(user.getEmail() != null ? user.getEmail().split("@")[0] : "user");
+        if (user.getFullName() == null) user.setFullName(user.getName());
+        if (user.getRole() == null) user.setRole("tourist");
+        if (user.getJoined() == null) user.setJoined(java.time.LocalDate.now().toString());
+        if (user.getBookingsCount() == null) user.setBookingsCount(0);
+        if (user.getStatus() == null) user.setStatus("Active");
+        if (user.getLanguage() == null) user.setLanguage("en");
+        if (user.getCurrency() == null) user.setCurrency("INR");
+        if (user.getTheme() == null) user.setTheme("light");
+        
         AppUser savedUser = appUserRepository.save(user);
-        if (user.getId() == null) {
-            userAlertService.createAlert("admin@tournest.com", 
-                "New Explorer Joined: " + savedUser.getFullName() + " (" + savedUser.getRole() + ")", "SUCCESS");
-        }
+        userAlertService.createAlert("admin@tournest.com", 
+            "New Explorer Joined: " + savedUser.getFullName() + " (" + savedUser.getRole() + ")", "SUCCESS");
         return savedUser;
     }
 

@@ -57,6 +57,8 @@ public class HotelService {
         hotel.setPrice(hotelDetails.getPrice());
         hotel.setRating(hotelDetails.getRating());
         hotel.setImage(hotelDetails.getImage());
+        hotel.setRegion(hotelDetails.getRegion());
+        hotel.setBestSeason(hotelDetails.getBestSeason());
         hotel.setHotelCapacityLimit(hotelDetails.getHotelCapacityLimit());
         
         return hotelRepository.save(hotel);

@@ -152,8 +152,9 @@ public class BookingService {
                 AppUser u = user.get();
                 if (u.getFullName() == null || u.getFullName().isEmpty()) {
                     u.setFullName(booking.getUser());
-                    appUserRepository.save(u);
                 }
+                u.setBookingsCount(u.getBookingsCount() != null ? u.getBookingsCount() + 1 : 1);
+                appUserRepository.save(u);
             } else {
                 try {
                     AppUser newUser = new AppUser();

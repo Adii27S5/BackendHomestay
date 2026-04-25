@@ -81,16 +81,22 @@ public class HomestayService {
     public Homestay updateHomestay(@NonNull Long id, @NonNull Homestay details) {
         Homestay homestay = homestayRepository.findById(id).orElseThrow(() -> new RuntimeException("Homestay not found"));
         
-        homestay.setImage(details.getImage());
-        homestay.setTitle(details.getTitle());
-        homestay.setLocation(details.getLocation());
-        homestay.setRating(details.getRating());
-        homestay.setPrice(details.getPrice());
-        homestay.setHost(details.getHost());
-        homestay.setGuests(details.getGuests());
-        homestay.setAmenities(details.getAmenities());
-        homestay.setCategory(details.getCategory());
-        homestay.setMaxCapacity(details.getMaxCapacity());
+        if (details.getImage() != null) homestay.setImage(details.getImage());
+        if (details.getTitle() != null) homestay.setTitle(details.getTitle());
+        if (details.getLocation() != null) homestay.setLocation(details.getLocation());
+        if (details.getRating() != null) homestay.setRating(details.getRating());
+        if (details.getPrice() != null) homestay.setPrice(details.getPrice());
+        if (details.getHost() != null) homestay.setHost(details.getHost());
+        if (details.getGuests() > 0) homestay.setGuests(details.getGuests());
+        if (details.getBedrooms() > 0) homestay.setBedrooms(details.getBedrooms());
+        if (details.getBathrooms() > 0) homestay.setBathrooms(details.getBathrooms());
+        if (details.getAmenities() != null) homestay.setAmenities(details.getAmenities());
+        if (details.getCategory() != null) homestay.setCategory(details.getCategory());
+        if (details.getMaxCapacity() > 0) homestay.setMaxCapacity(details.getMaxCapacity());
+        if (details.getDescription() != null) homestay.setDescription(details.getDescription());
+        if (details.getRegion() != null) homestay.setRegion(details.getRegion());
+        if (details.getBestSeason() != null) homestay.setBestSeason(details.getBestSeason());
+        if (details.getApproved() != null) homestay.setApproved(details.getApproved());
         
         return homestayRepository.save(homestay);
     }

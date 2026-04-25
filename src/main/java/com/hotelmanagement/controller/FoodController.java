@@ -50,6 +50,15 @@ public class FoodController {
         return foodService.saveFood(food);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Food> updateFood(@NonNull @PathVariable Long id, @NonNull @RequestBody Food details) {
+        try {
+            return ResponseEntity.ok(foodService.modifyFoodDetails(id, details));
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteFood(@NonNull @PathVariable Long id) {
         foodService.deleteFood(id);

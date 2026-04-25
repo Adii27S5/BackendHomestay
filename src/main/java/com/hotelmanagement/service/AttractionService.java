@@ -93,13 +93,17 @@ public class AttractionService {
     public Attraction updateAttraction(@NonNull Long id, @NonNull Attraction details) {
         Attraction attraction = attractionRepository.findById(id).orElseThrow(() -> new RuntimeException("Attraction not found"));
         
-        attraction.setImage(details.getImage());
-        attraction.setTitle(details.getTitle());
-        attraction.setLocation(details.getLocation());
-        attraction.setDuration(details.getDuration());
-        attraction.setRating(details.getRating());
-        attraction.setCategory(details.getCategory());
-        attraction.setDescription(details.getDescription());
+        if (details.getImage() != null) attraction.setImage(details.getImage());
+        if (details.getTitle() != null) attraction.setTitle(details.getTitle());
+        if (details.getLocation() != null) attraction.setLocation(details.getLocation());
+        if (details.getDuration() != null) attraction.setDuration(details.getDuration());
+        if (details.getRating() != 0) attraction.setRating(details.getRating());
+        if (details.getCategory() != null) attraction.setCategory(details.getCategory());
+        if (details.getDescription() != null) attraction.setDescription(details.getDescription());
+        if (details.getRegion() != null) attraction.setRegion(details.getRegion());
+        if (details.getBestSeason() != null) attraction.setBestSeason(details.getBestSeason());
+        if (details.getGuideEmail() != null) attraction.setGuideEmail(details.getGuideEmail());
+        if (details.isApproved() != attraction.isApproved()) attraction.setApproved(details.isApproved());
         
         return attractionRepository.save(attraction);
     }

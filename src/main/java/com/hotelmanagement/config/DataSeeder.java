@@ -17,7 +17,7 @@ import java.util.List;
 @Component
 public class DataSeeder implements CommandLineRunner {
 
-    @Autowired private AppUserRepository userRepository;
+
     @Autowired private AttractionRepository attractionRepository;
     @Autowired private HotelRepository hotelRepository;
     @Autowired private HomestayRepository homestayRepository;
@@ -29,14 +29,12 @@ public class DataSeeder implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        if (attractionRepository.count() > 0) {
-            System.out.println("[DataSeeder] Persistence maintained. Database already seeded.");
-            return;
+        System.out.println("[DataSeeder] Initializing new regional data ecosystem and checking data...");
+        if (attractionRepository.count() > 15) {
+             System.out.println("[DataSeeder] Already seeded.");
+             return;
         }
-
-        System.out.println("[DataSeeder] Initializing new regional data ecosystem...");
         
-        seedUsers();
         seedAttractions();
         seedHotels();
         seedHomestays();
@@ -65,29 +63,7 @@ public class DataSeeder implements CommandLineRunner {
         }
     }
 
-    private void seedUsers() {
-        List<AppUser> users = new ArrayList<>();
-        users.add(createU("TourNest Admin", "admin@tournest.com", "ADMIN", "Active"));
-        users.add(createU("Host Aditya", "host@test.com", "HOST", "Active"));
-        users.add(createU("John Doe", "user@test.com", "USER", "Active"));
-        userRepository.saveAll(users);
-    }
 
-    private AppUser createU(String fullName, String email, String role, String status) {
-        AppUser u = new AppUser();
-        u.setFullName(fullName);
-        u.setName(fullName.split(" ")[0]);
-        u.setEmail(email);
-        u.setPassword("password123"); // Required by schema
-        u.setRole(role);
-        u.setStatus(status);
-        u.setJoined("April 2024");
-        u.setBookingsCount(0);
-        u.setLanguage("en");
-        u.setCurrency("INR");
-        u.setTheme("light");
-        return u;
-    }
 
     private void seedAttractions() {
         List<Attraction> attractions = new ArrayList<>();
@@ -109,6 +85,12 @@ public class DataSeeder implements CommandLineRunner {
         // Food Specific Tours for Discovery Filter
         attractions.add(createA("banarasi-paan.png", "Varanasi Street Food Trail", "Varanasi", "3 hours", 5.0, "Food", "Taste the legendary Paan, Malaiyyo, and Kachori Sabzi.", "Heritage North", "Oct - March"));
         attractions.add(createA("chole-bhature.png", "Old Delhi Culinary Walk", "Delhi", "4 hours", 4.9, "Food", "Explore the Narrow lanes of Chandni Chowk for iconic tastes.", "Heritage North", "Oct - March"));
+        
+        // Missing Destinations added
+        attractions.add(createA("goa-beach.jpg", "Dudhsagar Waterfalls Trek", "Goa", "Full Day", 4.8, "Adventure", "Trek through the lush Western Ghats to the majestic falls.", "Coastal South", "Oct - May"));
+        attractions.add(createA("kerala-houseboat.jpg", "Alleppey Backwaters Cruise", "Kerala", "6 hours", 4.9, "Nature", "Float through the serene palm-fringed backwaters.", "Coastal South", "Sept - March"));
+        attractions.add(createA("kolkata-food.png", "Victoria Memorial Heritage", "Kolkata", "3 hours", 4.8, "Heritage", "Explore the colonial architecture of the City of Joy.", "Himalayan East", "Oct - March"));
+        attractions.add(createA("munnar-resort.png", "Havelock Island Scuba", "Andaman", "4 hours", 5.0, "Adventure", "Dive into the crystal clear waters of the Bay of Bengal.", "Coastal South", "Nov - May"));
         
         attractionRepository.saveAll(attractions);
     }
@@ -141,6 +123,12 @@ public class DataSeeder implements CommandLineRunner {
         hotels.add(createH("Glenburn Tea Estate", "Darjeeling", 22000.0, 4.9, "glenburn-tea.png", "Himalayan East", "Oct - April", 12));
         hotels.add(createH("Radisson Blu Amritsar", "Amritsar", 9500.0, 4.8, "amritsar-stay.png", "Heritage North", "Sept - March", 120));
         
+        // Missing Destinations added
+        hotels.add(createH("Taj Exotica Resort", "Goa", 28000.0, 4.9, "goa-beach.jpg", "Coastal South", "Oct - March", 140));
+        hotels.add(createH("Kumarakom Lake Resort", "Kerala", 32000.0, 5.0, "kerala-houseboat.jpg", "Coastal South", "Sept - March", 80));
+        hotels.add(createH("ITC Sonar", "Kolkata", 15000.0, 4.8, "itc-grand-chola.png", "Himalayan East", "Oct - March", 180));
+        hotels.add(createH("Taj Exotica Resort & Spa", "Andaman", 40000.0, 5.0, "leela-palace.png", "Coastal South", "Nov - May", 75));
+        
         hotelRepository.saveAll(hotels);
     }
 
@@ -168,6 +156,12 @@ public class DataSeeder implements CommandLineRunner {
         homestays.add(createStay("udaipur-lake.png", "Lakefront Palace Stay", "Udaipur", 4.9, 9500.0, "Karan Singh", 4, 2, 2, "Royal experience overlooking Lake Pichola.", "Heritage", "Sept - March"));
         homestays.add(createStay("amritsar-stay.png", "Golden Temple Heritage Villa", "Amritsar", 5.0, 4200.0, "Sodhi Ji", 4, 2, 2, "Steps away from the holy shrine.", "Heritage", "Sept - March"));
         homestays.add(createStay("dal-lake.png", "Srinagar Royal Houseboat", "Srinagar", 4.9, 8500.0, "Bhat", 6, 3, 2, "Luxury carved wood stay on the water.", "Nature", "April - Oct"));
+        
+        // Missing Destinations added
+        homestays.add(createStay("goa-beach.jpg", "Arambol Beach Villa", "Goa", 4.8, 6500.0, "Fernandes", 8, 4, 3, "Private villa steps from the sand.", "Beach", "Oct - May"));
+        homestays.add(createStay("kerala-houseboat.jpg", "Alleppey Eco Houseboat", "Kerala", 4.9, 8500.0, "Nair", 4, 2, 2, "Authentic traditional floating stay.", "Nature", "Sept - March"));
+        homestays.add(createStay("delhi-lodge.png", "Ballygunge Heritage Stay", "Kolkata", 4.7, 4500.0, "Banerjee", 4, 2, 2, "Vintage Bengali architecture and hospitality.", "Heritage", "Oct - March"));
+        homestays.add(createStay("munnar-mist.png", "Havelock Island Eco Lodge", "Andaman", 4.9, 5800.0, "Singh", 2, 1, 1, "Sustainable lodge in the tropical forest.", "Nature", "Nov - May"));
         
         homestayRepository.saveAll(homestays);
     }
@@ -213,6 +207,11 @@ public class DataSeeder implements CommandLineRunner {
         foods.add(createFood("Darjeeling Momos", "Darjeeling", "Himalayan steamed dumplings.", "darjeeling-momos.png", 120.0, 4.9, "Himalayan East"));
         foods.add(createFood("Amritsari Kulcha", "Amritsar", "Crispy bread with chole.", "amritsar-kulcha.png", 150.0, 5.0, "Heritage North"));
         foods.add(createFood("Bhopali Poha Jalebi", "Bhopal", "Iconic MP breakfast.", "poha-jalebi.png", 60.0, 4.9, "Central North"));
+        
+        // Missing Destinations added
+        foods.add(createFood("Goan Fish Curry", "Goa", "Spicy coconut based seafood.", "kashmiri-rogan-josh.png", 450.0, 4.9, "Coastal South"));
+        foods.add(createFood("Kerala Sadhya", "Kerala", "Traditional vegetarian feast on banana leaf.", "appam-stew.png", 350.0, 5.0, "Coastal South"));
+        foods.add(createFood("Kolkata Biryani", "Kolkata", "Aromatic biryani with the signature potato.", "dal-baati-churma.png", 280.0, 4.9, "Himalayan East"));
         
         foodRepository.saveAll(foods);
     }

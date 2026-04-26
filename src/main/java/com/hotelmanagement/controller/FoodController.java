@@ -53,7 +53,7 @@ public class FoodController {
     @PutMapping("/{id}")
     public ResponseEntity<Food> updateFood(@NonNull @PathVariable Long id, @NonNull @RequestBody Food details) {
         try {
-            return ResponseEntity.ok(foodService.modifyFoodDetails(id, details));
+            return ResponseEntity.ok(foodService.updateFoodDetails(id, details));
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }

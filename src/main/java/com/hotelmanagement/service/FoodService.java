@@ -41,7 +41,7 @@ public class FoodService {
         return foodRepository.save(food);
     }
 
-    public Food modifyFoodDetails(@NonNull Long id, @NonNull Food details) {
+    public Food updateFoodDetails(@NonNull Long id, @NonNull Food details) {
         Food food = foodRepository.findById(id).orElseThrow(() -> new RuntimeException("Food not found with id: " + id));
         
         if (details.getTitle() != null) food.setTitle(details.getTitle());

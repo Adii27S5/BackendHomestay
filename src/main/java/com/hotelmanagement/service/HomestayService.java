@@ -71,7 +71,9 @@ public class HomestayService {
     }
 
     public Homestay createHomestay(@NonNull Homestay homestay) {
-        homestay.setApproved(false); // New submissions require approval
+        if (homestay.getApproved() == null) {
+            homestay.setApproved(false); // New submissions from users require approval
+        }
         Homestay saved = homestayRepository.save(homestay);
         // Notify admin via alert + email
         userAlertService.createAlert("admin@tournest.com",

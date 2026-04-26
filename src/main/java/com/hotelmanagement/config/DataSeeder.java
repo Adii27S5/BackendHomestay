@@ -110,13 +110,13 @@ public class DataSeeder implements CommandLineRunner {
         hotels.add(createH("Taj Lake Palace", "Udaipur", 35000.0, 5.0, "udaipur-floating-palace.png", "Royal West", "Sept - March", 65));
         hotels.add(createH("ITC Grand Chola", "Chennai", 18000.0, 4.8, "itc-grand-chola.png", "Coastal South", "Nov - Feb", 200));
         hotels.add(createH("Glenburn Tea Estate", "Darjeeling", 22000.0, 4.9, "glenburn-tea.png", "Himalayan East", "Oct - April", 12));
-        hotels.add(createH("Radisson Blu Amritsar", "Amritsar", 9500.0, 4.8, "amritsar-stay.png", "Heritage North", "Sept - March", 120));
+        hotels.add(createH("Radisson Blu Amritsar", "Amritsar", 9500.0, 4.8, "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&q=80&w=800", "Heritage North", "Sept - March", 120));
         
         // Missing Destinations added
-        hotels.add(createH("Taj Exotica Resort", "Goa", 28000.0, 4.9, "goa-beach.jpg", "Coastal South", "Oct - March", 140));
-        hotels.add(createH("Kumarakom Lake Resort", "Kerala", 32000.0, 5.0, "kerala-houseboat.jpg", "Coastal South", "Sept - March", 80));
-        hotels.add(createH("ITC Sonar", "Kolkata", 15000.0, 4.8, "itc-grand-chola.png", "Himalayan East", "Oct - March", 180));
-        hotels.add(createH("Taj Exotica Resort & Spa", "Andaman", 40000.0, 5.0, "leela-palace.png", "Coastal South", "Nov - May", 75));
+        hotels.add(createH("Taj Exotica Resort", "Goa", 28000.0, 4.9, "https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&q=80&w=800", "Coastal South", "Oct - March", 140));
+        hotels.add(createH("Kumarakom Lake Resort", "Kerala", 32000.0, 5.0, "https://images.unsplash.com/photo-1602002418082-a4443e081dd1?auto=format&fit=crop&q=80&w=800", "Coastal South", "Sept - March", 80));
+        hotels.add(createH("ITC Sonar", "Kolkata", 15000.0, 4.8, "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=800", "Himalayan East", "Oct - March", 180));
+        hotels.add(createH("Taj Exotica Resort & Spa", "Andaman", 40000.0, 5.0, "https://images.unsplash.com/photo-1589394815804-964ed9be2eb3?auto=format&fit=crop&q=80&w=800", "Coastal South", "Nov - May", 75));
         
         hotelRepository.saveAll(hotels);
     }
@@ -147,14 +147,14 @@ public class DataSeeder implements CommandLineRunner {
         homestays.add(createStay("gulmarg-ski-resort.png", "Gulmarg Ski Resort & Spa", "Gulmarg", 4.9, 12500.0, "Bhat", 6, 3, 2, "Luxury carved wood stay on the snow.", "Snow", "Nov - March", Arrays.asList("Heating", "Skiing", "Fireplace")));
         
         // Missing Destinations added
-        homestays.add(createStay("goa-beach.jpg", "Arambol Beach Villa", "Goa", 4.8, 6500.0, "Fernandes", 8, 4, 3, "Private villa steps from the sand.", "Beach", "Oct - May", Arrays.asList("WiFi", "Private Pool", "Beach Access")));
+        homestays.add(createStay("https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&q=80&w=800", "Arambol Beach Villa", "Goa", 4.8, 6500.0, "Fernandes", 8, 4, 3, "Private villa steps from the sand.", "Beach", "Oct - May", Arrays.asList("WiFi", "Private Pool", "Beach Access")));
         homestays.add(createStay("kerala-houseboat.jpg", "Alleppey Eco Houseboat", "Kerala", 4.9, 8500.0, "Nair", 4, 2, 2, "Authentic traditional floating stay.", "Nature", "Sept - March", Arrays.asList("All Meals", "Sunset Deck", "Backwater Tour")));
         homestays.add(createStay("delhi-lodge.png", "Ballygunge Heritage Stay", "Kolkata", 4.7, 4500.0, "Banerjee", 4, 2, 2, "Vintage Bengali architecture and hospitality.", "Heritage", "Oct - March", Arrays.asList("Authentic Food", "Library", "Heritage Walk")));
         homestays.add(createStay("havelock-eco.png", "Havelock Island Eco Lodge", "Andaman", 4.9, 5800.0, "Singh", 2, 1, 1, "Sustainable beachside lodge with direct access to white sands.", "Beach", "Nov - May", Arrays.asList("WiFi", "Snorkeling Gear", "Ocean View")));
         
         // Extra Beach Stays
-        homestays.add(createStay("havelock-eco.png", "Varkala Cliff Resort", "Kerala", 4.8, 5200.0, "Menon", 4, 2, 1, "Perched on the cliff overlooking the Arabian Sea.", "Beach", "Oct - March", Arrays.asList("WiFi", "Sea View", "Surfing")));
-        homestays.add(createStay("goa-beach.jpg", "Palolem Palm Retreat", "Goa", 4.7, 4100.0, "D'Souza", 2, 1, 1, "Cozy wooden cottage under palm trees.", "Beach", "Nov - April", Arrays.asList("WiFi", "Beach Bar", "Kayaking")));
+        homestays.add(createStay("varkala-cliff.png", "Varkala Cliff Resort", "Kerala", 4.8, 5200.0, "Menon", 4, 2, 1, "Perched on the cliff overlooking the Arabian Sea.", "Beach", "Oct - March", Arrays.asList("WiFi", "Sea View", "Surfing")));
+        homestays.add(createStay("palolem-beach.png", "Palolem Palm Retreat", "Goa", 4.7, 4100.0, "D'Souza", 2, 1, 1, "Cozy wooden cottage under palm trees.", "Beach", "Nov - April", Arrays.asList("WiFi", "Beach Bar", "Kayaking")));
 
         // Extra Snow Stays
         homestays.add(createStay("shimla-snow.png", "Shimla Heritage Pine", "Shimla", 4.8, 7200.0, "Sharma", 6, 3, 2, "Classic colonial architecture surrounded by snow.", "Snow", "Dec - March", Arrays.asList("Heating", "Valley View", "Fireplace")));

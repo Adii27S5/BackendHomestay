@@ -1,9 +1,3 @@
-databases:
-  - name: tournest-db
-    databaseName: homestayhub
-    plan: free
-    region: oregon
-
 services:
   - type: web
     name: tournest-backend-docker
@@ -14,10 +8,6 @@ services:
     envVars:
       - key: PORT
         value: 8082
-      - key: JDBC_DATABASE_URL
-        fromDatabase:
-          name: tournest-db
-          property: connectionString
       - key: MAIL_USERNAME
         value: tournestofc@gmail.com
       - key: MAIL_PASSWORD

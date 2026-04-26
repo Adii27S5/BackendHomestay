@@ -1,7 +1,6 @@
 databases:
   - name: tournest-db
     databaseName: homestayhub
-    user: postgres
     plan: free
     region: oregon
 

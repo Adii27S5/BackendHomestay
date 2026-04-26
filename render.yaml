@@ -1,14 +1,17 @@
 services:
   - type: web
-    name: backend-homestay-java
-    runtime: java
-    buildCommand: ./mvnw clean install -DskipTests
-    startCommand: java -jar target/backend-0.1.0-SNAPSHOT.jar
+    name: tournest-backend-docker
+    env: docker
+    dockerfilePath: ./Dockerfile
+    region: oregon
+    plan: free
     envVars:
+      - key: PORT
+        value: 8082
       - key: MYSQLHOST
         value: maglev.proxy.rlwy.net
       - key: MYSQLPORT
-        value: "28569"
+        value: '28569'
       - key: MYSQLDATABASE
         value: railway
       - key: MYSQLUSER
@@ -19,5 +22,3 @@ services:
         value: tournestofc@gmail.com
       - key: MAIL_PASSWORD
         value: rogkopleaitjqcgf
-      - key: PORT
-        value: "8082"

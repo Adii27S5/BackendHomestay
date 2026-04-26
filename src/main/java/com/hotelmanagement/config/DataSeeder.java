@@ -161,7 +161,7 @@ public class DataSeeder implements CommandLineRunner {
         homestays.add(createStay("manali-snow-stay.png", "Auli Ski Cabin", "Auli", 4.9, 8500.0, "Negi", 4, 2, 1, "Direct access to some of India's best ski slopes.", "Snow", "Jan - March", Arrays.asList("Heating", "Ski Pass", "Hot Tub")));
         
         // Stays for Missing Tour Locations
-        homestays.add(createStay("jaipur-heritage.png", "Royal Rajputana Haveli", "Jaipur", 4.9, 6500.0, "Singh", 6, 3, 3, "Experience traditional Rajasthani royalty.", "Heritage", "Oct - March", Arrays.asList("WiFi", "Heritage Walk", "Traditional Thali")));
+        homestays.add(createStay("jaipur-haveli.jpg", "Royal Rajputana Haveli", "Jaipur", 4.9, 6500.0, "Singh", 6, 3, 3, "Experience traditional Rajasthani royalty.", "Heritage", "Oct - March", Arrays.asList("WiFi", "Heritage Walk", "Traditional Thali")));
         homestays.add(createStay("ladakh-bikers.png", "Himalayan High Stay", "Ladakh", 4.8, 3200.0, "Dorje", 4, 2, 1, "Warm homestay amidst the cold desert.", "Adventure", "June - Sept", Arrays.asList("Heating", "Oxygen Cylinder", "Local Food")));
         homestays.add(createStay("taj-mahal-sunrise.png", "Agra Heritage Villa", "Agra", 4.7, 4500.0, "Sharma", 4, 2, 2, "Walking distance from the Taj Mahal.", "Heritage", "Oct - March", Arrays.asList("WiFi", "Taj View", "Breakfast")));
         homestays.add(createStay("darjeeling-train.png", "Glenburn Tea Estate Stay", "Darjeeling", 5.0, 8500.0, "Pradhan", 4, 2, 2, "Luxury stay in the misty tea gardens.", "Nature", "Sept - Dec", Arrays.asList("WiFi", "Tea Tasting", "Mountain View")));

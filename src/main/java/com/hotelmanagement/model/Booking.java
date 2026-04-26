@@ -12,7 +12,7 @@ public class Booking {
     @Column(nullable = false)
     private String entity;
 
-    @Column(nullable = false)
+    @Column(name = "booking_user", nullable = false)
     private String user;
 
     @Column(nullable = false)

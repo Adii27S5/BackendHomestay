@@ -1,5 +1,5 @@
 services:
-  - type: private
+  - type: pserv
     name: tournest-mysql
     env: docker
     dockerfilePath: ./Dockerfile.mysql

@@ -1,14 +1,11 @@
-services:
-  - type: web
-    name: tournest-mysql
-    env: docker
-    dockerfilePath: ./Dockerfile.mysql
+databases:
+  - name: tournest-db
+    databaseName: homestayhub
+    user: postgres
     plan: free
     region: oregon
-    envVars:
-      - key: PORT
-        value: 3306
 
+services:
   - type: web
     name: tournest-backend-docker
     env: docker
@@ -18,16 +15,10 @@ services:
     envVars:
       - key: PORT
         value: 8082
-      - key: MYSQLHOST
-        value: tournest-mysql
-      - key: MYSQLPORT
-        value: '3306'
-      - key: MYSQLDATABASE
-        value: homestayhub
-      - key: MYSQLUSER
-        value: root
-      - key: MYSQLPASSWORD
-        value: tournest123
+      - key: JDBC_DATABASE_URL
+        fromDatabase:
+          name: tournest-db
+          property: connectionString
       - key: MAIL_USERNAME
         value: tournestofc@gmail.com
       - key: MAIL_PASSWORD

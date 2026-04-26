@@ -1,5 +1,15 @@
 services:
   - type: web
+    name: tournest-mysql
+    env: docker
+    dockerfilePath: ./Dockerfile.mysql
+    plan: free
+    region: oregon
+    envVars:
+      - key: PORT
+        value: 3306
+
+  - type: web
     name: tournest-backend-docker
     env: docker
     dockerfilePath: ./Dockerfile
@@ -9,15 +19,15 @@ services:
       - key: PORT
         value: 8082
       - key: MYSQLHOST
-        value: maglev.proxy.rlwy.net
+        value: tournest-mysql
       - key: MYSQLPORT
-        value: '28569'
+        value: '3306'
       - key: MYSQLDATABASE
-        value: railway
+        value: homestayhub
       - key: MYSQLUSER
         value: root
       - key: MYSQLPASSWORD
-        value: Aditya@2234
+        value: tournest123
       - key: MAIL_USERNAME
         value: tournestofc@gmail.com
       - key: MAIL_PASSWORD

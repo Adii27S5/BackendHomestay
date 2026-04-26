@@ -22,10 +22,6 @@ public class DataSeeder implements CommandLineRunner {
     @Autowired private HotelRepository hotelRepository;
     @Autowired private HomestayRepository homestayRepository;
     @Autowired private FoodRepository foodRepository;
-    @Autowired private ReviewRepository reviewRepository;
-    @Autowired private BookingRepository bookingRepository;
-    @Autowired private FavoriteRepository favoriteRepository;
-    @Autowired private SearchHistoryRepository searchHistoryRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -39,29 +35,9 @@ public class DataSeeder implements CommandLineRunner {
         seedHotels();
         seedHomestays();
         seedFoods();
-        seedExtraData();
     }
 
-    private void seedExtraData() {
-        if (bookingRepository.count() == 0) {
-            Booking b1 = new Booking(null, "The Grand Palace", "John Doe", "user@test.com", "2024-05-15", "Confirmed", "8500.0", "varanasi-boutique.png", "Varanasi", "The Grand Palace", "host@test.com", 1L, "2024-05-15", 2, "", "");
-            bookingRepository.save(b1);
-        }
-        if (favoriteRepository.count() == 0) {
-            Favorite f1 = new Favorite("user@test.com", 1L, "ATTRACTION");
-            favoriteRepository.save(f1);
-        }
-        if (searchHistoryRepository.count() == 0) {
-            SearchHistory sh1 = new SearchHistory("user@test.com", "Varanasi");
-            searchHistoryRepository.save(sh1);
-        }
-        if (reviewRepository.count() == 0) {
-            attractionRepository.findById(1L).ifPresent(a -> {
-                Review r1 = new Review(a, "user@test.com", "John Doe", 5.0, "Great experience!");
-                reviewRepository.save(r1);
-            });
-        }
-    }
+
 
 
 
@@ -70,7 +46,7 @@ public class DataSeeder implements CommandLineRunner {
         attractions.add(createA("ganges-aarti.png", "Ganges Evening Aarti", "Varanasi", "2 hours", 5.0, "Spiritual", "A magnificent spiritual ceremony with clay lamps and incense.", "Heritage North", "Year-round"));
         attractions.add(createA("jaipur-haveli.jpg", "Amber Fort Heritage Walk", "Jaipur", "4 hours", 4.8, "Heritage", "Explore the grand architecture and hidden tunnels.", "Royal West", "Oct - March"));
         attractions.add(createA("tea-safari.png", "Tea Plantation Safari", "Munnar", "3 hours", 4.7, "Nature", "Walk through emerald tea gardens.", "Coastal South", "Sept - March"));
-        attractions.add(createA("manali-snow.jpg", "Snow Valley Paragliding", "Manali", "4 hours", 4.8, "Adventure", "Soar above the snow-capped Himalayan peaks.", "Himalayan North", "April - June"));
+        attractions.add(createA("manali-paragliding.png", "Snow Valley Paragliding", "Manali", "4 hours", 4.8, "Adventure", "Soar above the snow-capped Himalayan peaks.", "Himalayan North", "April - June"));
         attractions.add(createA("ladakh-bikers.jpg", "Khardung La Pass Ride", "Ladakh", "Full Day", 4.9, "Adventure", "Highest motorable roads in the world.", "Himalayan North", "June - Sept"));
         attractions.add(createA("taj-mahal-sunrise.png", "Taj Mahal Sunrise", "Agra", "3 hours", 5.0, "Heritage", "Majestic beauty glowing at sunrise.", "Heritage North", "Oct - March"));
         attractions.add(createA("darjeeling-train.png", "Darjeeling Toy Train", "Darjeeling", "2 hours", 4.7, "Heritage", "UNESCO heritage train through misty hills.", "Himalayan East", "Oct - Dec"));
@@ -81,6 +57,8 @@ public class DataSeeder implements CommandLineRunner {
         // Requested New Tours
         attractions.add(createA("bhopal-boat.png", "Bhopal Upper Lake Boating", "Bhopal", "2 hours", 4.7, "Adventure", "Speed boating and sunset views at the 'Bada Talaab'.", "Central North", "Year-round"));
         attractions.add(createA("mahabalipuram.png", "Shore Temple Ruins Walk", "Mahabalipuram", "3 hours", 4.9, "Heritage", "UNESCO site featuring 8th-century granite carvings.", "Coastal South", "Nov - Feb"));
+        attractions.add(createA("rishikesh-yoga.png", "Rishikesh Spiritual Yoga", "Rishikesh", "4 hours", 4.9, "Spiritual", "Find inner peace with a yoga session on the banks of the Ganges.", "Himalayan North", "Sept - April"));
+        attractions.add(createA("tirupati-balaji.png", "Tirupati Balaji Darshan", "Tirupati", "Full Day", 5.0, "Spiritual", "A sacred pilgrimage to the world's richest temple.", "Coastal South", "Year-round"));
         
         // Food Specific Tours for Discovery Filter
         attractions.add(createA("banarasi-paan.png", "Varanasi Street Food Trail", "Varanasi", "3 hours", 5.0, "Food", "Taste the legendary Paan, Malaiyyo, and Kachori Sabzi.", "Heritage North", "Oct - March"));
@@ -89,8 +67,18 @@ public class DataSeeder implements CommandLineRunner {
         // Missing Destinations added
         attractions.add(createA("goa-beach.jpg", "Dudhsagar Waterfalls Trek", "Goa", "Full Day", 4.8, "Adventure", "Trek through the lush Western Ghats to the majestic falls.", "Coastal South", "Oct - May"));
         attractions.add(createA("kerala-houseboat.jpg", "Alleppey Backwaters Cruise", "Kerala", "6 hours", 4.9, "Nature", "Float through the serene palm-fringed backwaters.", "Coastal South", "Sept - March"));
-        attractions.add(createA("kolkata-food.png", "Victoria Memorial Heritage", "Kolkata", "3 hours", 4.8, "Heritage", "Explore the colonial architecture of the City of Joy.", "Himalayan East", "Oct - March"));
-        attractions.add(createA("munnar-resort.png", "Havelock Island Scuba", "Andaman", "4 hours", 5.0, "Adventure", "Dive into the crystal clear waters of the Bay of Bengal.", "Coastal South", "Nov - May"));
+        attractions.add(createA("victoria-memorial.png", "Victoria Memorial Heritage", "Kolkata", "3 hours", 4.8, "Heritage", "Explore the colonial architecture of the City of Joy.", "Himalayan East", "Oct - March"));
+        attractions.add(createA("havelock-scuba.png", "Havelock Island Scuba", "Andaman", "4 hours", 5.0, "Adventure", "Dive into the crystal clear waters of the Bay of Bengal.", "Coastal South", "Nov - May"));
+        
+        // Cultural & Extra Nature
+        attractions.add(createA("kathakali-dance.png", "Kathakali Performance Art", "Kerala", "3 hours", 5.0, "Cultural", "Witness the vibrant classical Indian dance-drama.", "Coastal South", "Year-round"));
+        attractions.add(createA("rajputana-walk.png", "Rajputana Culture Walk", "Jaipur", "2 hours", 4.8, "Cultural", "A deep dive into the lives, art, and traditions of Rajasthan.", "Royal West", "Oct - March"));
+        
+        // Extra Cultural Tours
+        attractions.add(createA("delhi-lodge.png", "Sufi Music Evening", "Delhi", "2 hours", 4.9, "Cultural", "Soulful Sufi music performances at the historic Nizamuddin Dargah.", "Heritage North", "Year-round"));
+        attractions.add(createA("kathakali-dance.png", "Theyyam Ritual", "Kannur", "4 hours", 4.8, "Cultural", "Ancient and spectacular ritualistic dance of Northern Kerala.", "Coastal South", "Nov - Feb"));
+        attractions.add(createA("varanasi-ghat-stay.png", "Baul Singers Experience", "Kolkata", "2 hours", 4.7, "Cultural", "Immerse yourself in the mystic folk music of Bengal.", "Himalayan East", "Oct - March"));
+        attractions.add(createA("munnar-mist.png", "Western Ghats Safari", "Munnar", "5 hours", 4.9, "Nature", "Explore the dense forests and spot rare wildlife.", "Coastal South", "Sept - May"));
         
         attractionRepository.saveAll(attractions);
     }
@@ -152,16 +140,24 @@ public class DataSeeder implements CommandLineRunner {
         homestays.add(createStay("delhi-lodge.png", "Qutub View Homestay", "Delhi", 4.7, 3800.0, "Sanjay", 3, 1, 1, "Modern terrace view of the historic minaret.", "Heritage", "Year-round", Arrays.asList("WiFi", "City View", "Metro Access")));
         homestays.add(createStay("munnar-mist.png", "Tea Mist Cottage", "Munnar", 4.9, 5500.0, "Mariamma", 6, 3, 3, "Wake up to misty tea valley views.", "Nature", "Sept - March", Arrays.asList("WiFi", "Tea Estate Tour", "Valley View")));
         homestays.add(createStay("munnar-valley.png", "Munnar Valley Homestay", "Munnar", 4.7, 4800.0, "Joseph", 4, 2, 2, "Secluded villa amidst cardamom hills.", "Nature", "Year-round", Arrays.asList("WiFi", "Garden View", "Campfire")));
-        homestays.add(createStay("shimla-snow.png", "Snow Peaks Manor", "Manali", 4.8, 6500.0, "Meena", 5, 2, 2, "Panoramic views of Himalayan peaks.", "Mountain", "Dec - Feb", Arrays.asList("Heating", "Mountain View", "Local Cuisine")));
+        homestays.add(createStay("manali-snow-stay.png", "Snow Peaks Manor", "Manali", 4.8, 6500.0, "Meena", 5, 2, 2, "Panoramic views of Himalayan peaks.", "Snow", "Dec - Feb", Arrays.asList("Heating", "Mountain View", "Local Cuisine")));
         homestays.add(createStay("udaipur-lake.png", "Lakefront Palace Stay", "Udaipur", 4.9, 9500.0, "Karan Singh", 4, 2, 2, "Royal experience overlooking Lake Pichola.", "Heritage", "Sept - March", Arrays.asList("WiFi", "Lake View", "Royal Dining")));
         homestays.add(createStay("amritsar-stay.png", "Golden Temple Heritage Villa", "Amritsar", 5.0, 4200.0, "Sodhi Ji", 4, 2, 2, "Steps away from the holy shrine.", "Heritage", "Sept - March", Arrays.asList("WiFi", "Local Meals", "Spiritual Tour")));
-        homestays.add(createStay("dal-lake.png", "Srinagar Royal Houseboat", "Srinagar", 4.9, 8500.0, "Bhat", 6, 3, 2, "Luxury carved wood stay on the water.", "Nature", "April - Oct", Arrays.asList("Heating", "Shikara Ride", "Authentic Wazwan")));
+        homestays.add(createStay("gulmarg-ski-resort.png", "Gulmarg Ski Resort & Spa", "Gulmarg", 4.9, 12500.0, "Bhat", 6, 3, 2, "Luxury carved wood stay on the snow.", "Snow", "Nov - March", Arrays.asList("Heating", "Skiing", "Fireplace")));
         
         // Missing Destinations added
         homestays.add(createStay("goa-beach.jpg", "Arambol Beach Villa", "Goa", 4.8, 6500.0, "Fernandes", 8, 4, 3, "Private villa steps from the sand.", "Beach", "Oct - May", Arrays.asList("WiFi", "Private Pool", "Beach Access")));
         homestays.add(createStay("kerala-houseboat.jpg", "Alleppey Eco Houseboat", "Kerala", 4.9, 8500.0, "Nair", 4, 2, 2, "Authentic traditional floating stay.", "Nature", "Sept - March", Arrays.asList("All Meals", "Sunset Deck", "Backwater Tour")));
         homestays.add(createStay("delhi-lodge.png", "Ballygunge Heritage Stay", "Kolkata", 4.7, 4500.0, "Banerjee", 4, 2, 2, "Vintage Bengali architecture and hospitality.", "Heritage", "Oct - March", Arrays.asList("Authentic Food", "Library", "Heritage Walk")));
         homestays.add(createStay("havelock-eco.png", "Havelock Island Eco Lodge", "Andaman", 4.9, 5800.0, "Singh", 2, 1, 1, "Sustainable beachside lodge with direct access to white sands.", "Beach", "Nov - May", Arrays.asList("WiFi", "Snorkeling Gear", "Ocean View")));
+        
+        // Extra Beach Stays
+        homestays.add(createStay("havelock-eco.png", "Varkala Cliff Resort", "Kerala", 4.8, 5200.0, "Menon", 4, 2, 1, "Perched on the cliff overlooking the Arabian Sea.", "Beach", "Oct - March", Arrays.asList("WiFi", "Sea View", "Surfing")));
+        homestays.add(createStay("goa-beach.jpg", "Palolem Palm Retreat", "Goa", 4.7, 4100.0, "D'Souza", 2, 1, 1, "Cozy wooden cottage under palm trees.", "Beach", "Nov - April", Arrays.asList("WiFi", "Beach Bar", "Kayaking")));
+
+        // Extra Snow Stays
+        homestays.add(createStay("shimla-snow.png", "Shimla Heritage Pine", "Shimla", 4.8, 7200.0, "Sharma", 6, 3, 2, "Classic colonial architecture surrounded by snow.", "Snow", "Dec - March", Arrays.asList("Heating", "Valley View", "Fireplace")));
+        homestays.add(createStay("manali-snow-stay.png", "Auli Ski Cabin", "Auli", 4.9, 8500.0, "Negi", 4, 2, 1, "Direct access to some of India's best ski slopes.", "Snow", "Jan - March", Arrays.asList("Heating", "Ski Pass", "Hot Tub")));
         
         homestayRepository.saveAll(homestays);
     }
@@ -207,6 +203,18 @@ public class DataSeeder implements CommandLineRunner {
         foods.add(createFood("Darjeeling Momos", "Darjeeling", "Himalayan steamed dumplings.", "darjeeling-momos.png", 120.0, 4.9, "Himalayan East"));
         foods.add(createFood("Amritsari Kulcha", "Amritsar", "Crispy bread with chole.", "amritsar-kulcha.png", 150.0, 5.0, "Heritage North"));
         foods.add(createFood("Bhopali Poha Jalebi", "Bhopal", "Iconic MP breakfast.", "poha-jalebi.png", 60.0, 4.9, "Central North"));
+        foods.add(createFood("Bhopali Gosht Korma", "Bhopal", "Rich Mughlai meat curry.", "nihari.png", 350.0, 4.8, "Central North"));
+        foods.add(createFood("Sulaimani Chai", "Bhopal", "Black tea with salt and spices.", "chole-bhature.png", 40.0, 4.7, "Central North"));
+        foods.add(createFood("Shahi Tukda", "Bhopal", "Royal bread pudding.", "malaiyyo-dessert.png", 120.0, 4.9, "Central North"));
+
+        // Ladakh Foods
+        foods.add(createFood("Ladakhi Thukpa", "Ladakh", "Hearty noodle soup.", "darjeeling-momos.png", 150.0, 4.8, "Himalayan North"));
+        foods.add(createFood("Skyu", "Ladakh", "Traditional pasta dish.", "dal-baati-churma.png", 200.0, 4.7, "Himalayan North"));
+        foods.add(createFood("Butter Tea", "Ladakh", "Warm salty butter tea.", "banarasi-paan.png", 60.0, 4.6, "Himalayan North"));
+
+        // Extra Manali Foods
+        foods.add(createFood("Siddu", "Manali", "Local steamed bread.", "appam-stew.png", 100.0, 4.8, "Himalayan North"));
+        foods.add(createFood("Trout Fish", "Manali", "Fresh Himalayan trout.", "kashmiri-rogan-josh.png", 450.0, 4.9, "Himalayan North"));
         
         // Missing Destinations added
         foods.add(createFood("Goan Fish Curry", "Goa", "Spicy coconut based seafood.", "kashmiri-rogan-josh.png", 450.0, 4.9, "Coastal South"));

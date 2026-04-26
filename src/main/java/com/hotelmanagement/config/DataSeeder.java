@@ -26,8 +26,9 @@ public class DataSeeder implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         System.out.println("[DataSeeder] Initializing new regional data ecosystem and checking data...");
-        if (attractionRepository.count() > 15) {
-             System.out.println("[DataSeeder] Already seeded.");
+        if (attractionRepository.count() > 0) {
+             System.out.println("[DataSeeder] Tours already seeded. Checking for new missing homestays...");
+             seedHomestays();
              return;
         }
         
@@ -159,7 +160,28 @@ public class DataSeeder implements CommandLineRunner {
         homestays.add(createStay("shimla-snow.png", "Shimla Heritage Pine", "Shimla", 4.8, 7200.0, "Sharma", 6, 3, 2, "Classic colonial architecture surrounded by snow.", "Snow", "Dec - March", Arrays.asList("Heating", "Valley View", "Fireplace")));
         homestays.add(createStay("manali-snow-stay.png", "Auli Ski Cabin", "Auli", 4.9, 8500.0, "Negi", 4, 2, 1, "Direct access to some of India's best ski slopes.", "Snow", "Jan - March", Arrays.asList("Heating", "Ski Pass", "Hot Tub")));
         
-        homestayRepository.saveAll(homestays);
+        // Stays for Missing Tour Locations
+        homestays.add(createStay("jaipur-heritage.png", "Royal Rajputana Haveli", "Jaipur", 4.9, 6500.0, "Singh", 6, 3, 3, "Experience traditional Rajasthani royalty.", "Heritage", "Oct - March", Arrays.asList("WiFi", "Heritage Walk", "Traditional Thali")));
+        homestays.add(createStay("ladakh-bikers.png", "Himalayan High Stay", "Ladakh", 4.8, 3200.0, "Dorje", 4, 2, 1, "Warm homestay amidst the cold desert.", "Adventure", "June - Sept", Arrays.asList("Heating", "Oxygen Cylinder", "Local Food")));
+        homestays.add(createStay("taj-mahal-sunrise.png", "Agra Heritage Villa", "Agra", 4.7, 4500.0, "Sharma", 4, 2, 2, "Walking distance from the Taj Mahal.", "Heritage", "Oct - March", Arrays.asList("WiFi", "Taj View", "Breakfast")));
+        homestays.add(createStay("darjeeling-train.png", "Glenburn Tea Estate Stay", "Darjeeling", 5.0, 8500.0, "Pradhan", 4, 2, 2, "Luxury stay in the misty tea gardens.", "Nature", "Sept - Dec", Arrays.asList("WiFi", "Tea Tasting", "Mountain View")));
+        homestays.add(createStay("dal-lake.png", "Srinagar Floating Houseboat", "Srinagar", 4.9, 5800.0, "Khan", 4, 2, 2, "A magical stay floating on Dal Lake.", "Nature", "April - Oct", Arrays.asList("WiFi", "Shikara Ride", "Heating")));
+        homestays.add(createStay("bhopal-boat.png", "Nawabi Lakeview Retreat", "Bhopal", 4.6, 3800.0, "Qureshi", 4, 2, 2, "Overlooking the beautiful Upper Lake.", "Heritage", "Year-round", Arrays.asList("WiFi", "Lake View", "Poha Breakfast")));
+        homestays.add(createStay("mahabalipuram.png", "Shoreline Heritage Inn", "Mahabalipuram", 4.8, 4200.0, "Iyer", 4, 2, 2, "Cozy stay near the 8th-century Shore Temple.", "Heritage", "Nov - Feb", Arrays.asList("WiFi", "Beach Access", "AC")));
+        homestays.add(createStay("rishikesh-yoga.png", "Ganges Ashrama Stay", "Rishikesh", 4.9, 2500.0, "Swami", 2, 1, 1, "Peaceful spiritual retreat by the Ganges.", "Spiritual", "Sept - April", Arrays.asList("Yoga Sessions", "River View", "Vegan Meals")));
+        homestays.add(createStay("tirupati-balaji.png", "Balaji Pilgrim Guest House", "Tirupati", 4.7, 1800.0, "Reddy", 4, 2, 2, "Comfortable stay for temple pilgrims.", "Spiritual", "Year-round", Arrays.asList("AC", "Temple Transport", "Veg Meals")));
+        homestays.add(createStay("kathakali-dance.png", "Malabar Coast Villa", "Kannur", 4.8, 4600.0, "Nair", 4, 2, 2, "Traditional Kerala home near Theyyam rituals.", "Cultural", "Nov - Feb", Arrays.asList("WiFi", "Ayurveda", "Traditional Food")));
+        
+        List<Homestay> existing = homestayRepository.findAll();
+        java.util.Set<String> existingTitles = existing.stream().map(Homestay::getTitle).collect(java.util.stream.Collectors.toSet());
+        List<Homestay> toSave = homestays.stream().filter(h -> !existingTitles.contains(h.getTitle())).collect(java.util.stream.Collectors.toList());
+        
+        if (!toSave.isEmpty()) {
+            System.out.println("[DataSeeder] Seeding " + toSave.size() + " missing homestays...");
+            homestayRepository.saveAll(toSave);
+        } else {
+            System.out.println("[DataSeeder] All homestays are already seeded.");
+        }
     }
 
     private Homestay createStay(String img, String title, String loc, double rat, double price, String host, int guests, int beds, int baths, String desc, String category, String season, List<String> amenities) {

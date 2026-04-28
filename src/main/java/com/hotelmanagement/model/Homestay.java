@@ -28,6 +28,7 @@ public class Homestay {
     private String description;
 
     @ElementCollection
+    @OrderColumn(name = "amenity_order")
     private List<String> amenities;
 
     private String category;

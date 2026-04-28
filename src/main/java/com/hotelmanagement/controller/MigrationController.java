@@ -13,6 +13,16 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 public class MigrationController {
 
 
+    @GetMapping
+    public ResponseEntity<java.util.Map<String, String>> getAdminLinks() {
+        java.util.Map<String, String> links = new java.util.LinkedHashMap<>();
+        links.put("all_users", "/api/admin/users");
+        links.put("all_homestays", "/api/admin/homestays");
+        links.put("all_tours", "/api/admin/tours");
+        links.put("all_hotels", "/api/admin/hotels");
+        return ResponseEntity.ok(links);
+    }
+
     @Autowired
     private com.hotelmanagement.repository.AppUserRepository userRepository;
 

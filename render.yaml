@@ -12,3 +12,11 @@ services:
         value: tournestofc@gmail.com
       - key: MAIL_PASSWORD
         value: rogkopleaitjqcgf
+      - key: DB_URL
+        value: jdbc:mysql://mysql-20472862-tournest-mysql.c.aivencloud.com:23956/defaultdb?sslMode=REQUIRED
+      - key: DB_USERNAME
+        value: avnadmin
+      - key: DB_PASSWORD
+        value: PLACEHOLDER_ADD_IN_RENDER_DASHBOARD
+      - key: SPRING_JPA_HIBERNATE_DDL_AUTO
+        value: update

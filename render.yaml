@@ -5,6 +5,7 @@ services:
     dockerfilePath: ./Dockerfile
     region: oregon
     plan: free
+    healthCheckPath: /api/ping
     envVars:
       - key: PORT
         value: 8082
